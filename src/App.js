@@ -1,5 +1,6 @@
 import UserCard from "./components/UserCard";
 import Nav from "./components/Nav";
+import ControlBar from "./components/ControlBar";
 
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <div>
       <Nav />
       <UserCard />
+      <ControlBar />
     </div>
   );
 }
