@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
+import data from "../DATA";
 
 import "./ControlBar.css";
 
 const ControlBar = (props) => {
+  let currUserId = props.index + 1;
     return (
         <div className="control-bar-container">
           <Link
-            to={`/users/${props.id - 1}`}
-            onClick={() => props.changeUser(false)}
+            to={`/users/${currUserId === 1 ? 25: currUserId - 1}`}
+            onClick={() => currUserId === 1 ? props.changeUser(false, true) : props.changeUser(false)}
             className="change-user-btn"
           >
             &lt; Previous
@@ -18,8 +20,8 @@ const ControlBar = (props) => {
             <button>New</button>
           </div>
           <Link
-            to={`/users/${props.id + 1}`}
-            onClick={() => props.changeUser(true)}
+            to={`/users/${currUserId === data.length ? 1 :currUserId + 1}`}
+            onClick={() => currUserId === data.length ? props.changeUser(true, true) : props.changeUser(true)}
             className="change-user-btn"
           >
             Next &gt;

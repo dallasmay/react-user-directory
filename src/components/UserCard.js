@@ -7,19 +7,26 @@ import ControlBar from "./ControlBar";
 import "./UserCard.css";
 
 const UserCard = () => {
-  const params = useParams();
+  const { userId } = useParams();
 
-  const [currUserIndex, setCurrUserIndex] = useState(params.userId - 1);
+  const [currUserIndex, setCurrUserIndex] = useState(userId - 1);
   
   let currUser = data[currUserIndex];
 
-  const changeUser = (forward) => {
+  const changeUser = (forward, overflow) => {
+    if (forward && overflow) {
+      // wtf? Why does it work with -1?
+      setCurrUserIndex(-1);
+    } else if (!forward && overflow) {
+      setCurrUserIndex(data.length);
+    }
     if (forward) {
       setCurrUserIndex((prevState) => prevState + 1);
     } else {
       setCurrUserIndex((prevState) => prevState - 1);
     }
   };
+
 
   return (
     <div>
@@ -53,7 +60,7 @@ const UserCard = () => {
           </div>
         </div>
       </div>
-      <ControlBar changeUser={changeUser} id={currUser.id}/>
+      <ControlBar changeUser={changeUser} index={currUserIndex}/>
     </div>
   );
 };
