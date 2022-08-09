@@ -27,13 +27,12 @@ const UserCard = () => {
     }
   };
 
-
   return (
     <div>
       <div className="user-card-container">
         <div className="user-card">
           <div className="counter-flex">
-            <div className="userCounter">{`${currUserIndex + 1}/25`}</div>
+            <div className="userCounter">{`${currUserIndex + 1}/${data.length}`}</div>
           </div>
           <div className="info-container">
             <h2 className="card-name">{`${currUser.name.first} ${currUser.name.last}`}</h2>

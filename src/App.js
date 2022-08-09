@@ -2,6 +2,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 
 import UserCard from "./components/UserCard";
 import Nav from "./components/Nav";
+import NewCard from "./components/NewCardForm";
 
 function App() {
   return (
@@ -14,6 +15,14 @@ function App() {
             <Nav /> <UserCard />
           </div>
         }
+      />
+      <Route path="/users/add-new-user"
+      element={
+        <div>
+          <Nav />
+          <NewCard />
+        </div>
+      }
       />
     </Routes>
   );
