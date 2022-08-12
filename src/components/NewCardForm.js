@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import data from "../DATA";
 
-const NewCard = () => {
+const NewCardForm = (props) => {
   const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState("");
@@ -15,6 +14,7 @@ const NewCard = () => {
   const [favMovie1, setFavMovie1] = useState("");
   const [favMovie2, setFavMovie2] = useState("");
   const [favMovie3, setFavMovie3] = useState("");
+  let userArr = props.userArr;
 
   const newUserObj = {
     name: { first: firstName, last: lastName },
@@ -26,7 +26,15 @@ const NewCard = () => {
   };
 
   return (
-    <form>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        // props.addUserFunction(newUserObj);
+        console.log(props.addUserFunction)
+        console.log(userArr)
+        // navigate(`/users/${userArr.length}`)
+      }}
+    >
       <div className="user-card-container">
         <div className="user-card">
           <div className="info-container">
@@ -106,15 +114,7 @@ const NewCard = () => {
       </div>
       <div className="button-container">
         <button className="cancel">Cancel</button>
-        <button
-          type="submit"
-          className="confirm"
-          onSubmit={(e) => {
-            e.preventDefault();
-            data.push(newUserObj);
-            // navigate(`/users/${data.length}`)
-          }}
-        >
+        <button type="submit" className="confirm">
           Confirm
         </button>
       </div>
@@ -122,4 +122,4 @@ const NewCard = () => {
   );
 };
 
-export default NewCard;
+export default NewCardForm;

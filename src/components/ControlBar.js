@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import data from "../DATA";
 
 import "./ControlBar.css";
 
@@ -30,9 +29,9 @@ const ControlBar = (props) => {
           </Link>
         </div>
         <Link
-          to={`/users/${currUserId === data.length ? 1 : currUserId + 1}`}
+          to={`/users/${currUserId === props.userArr.length ? 1 : currUserId + 1}`}
           onClick={() =>
-            currUserId === data.length
+            currUserId === props.userArr.length
               ? props.changeUser(true, true)
               : props.changeUser(true)
           }

@@ -6,19 +6,20 @@ import ControlBar from "./ControlBar";
 
 import "./UserCard.css";
 
-const UserCard = () => {
+const UserCard = (props) => {
   const { userId } = useParams();
 
   const [currUserIndex, setCurrUserIndex] = useState(userId - 1);
-  
-  let currUser = data[currUserIndex];
+  const [userArr, setUserArr] = useState([...data]);
+
+  let currUser = userArr[currUserIndex];
 
   const changeUser = (forward, overflow) => {
     if (forward && overflow) {
       // wtf? Why does it work with -1?
       setCurrUserIndex(-1);
     } else if (!forward && overflow) {
-      setCurrUserIndex(data.length);
+      setCurrUserIndex(userArr.length);
     }
     if (forward) {
       setCurrUserIndex((prevState) => prevState + 1);
@@ -27,12 +28,20 @@ const UserCard = () => {
     }
   };
 
+  const addUser = (newUserObj) => {
+    setUserArr((prevState) => [...prevState, newUserObj]);
+  };
+  props.addUserDrill(addUser)
+  props.userArrDrill(userArr);
+
   return (
     <div>
       <div className="user-card-container">
         <div className="user-card">
           <div className="counter-flex">
-            <div className="userCounter">{`${currUserIndex + 1}/${data.length}`}</div>
+            <div className="userCounter">{`${currUserIndex + 1}/${
+              userArr.length
+            }`}</div>
           </div>
           <div className="info-container">
             <h2 className="card-name">{`${currUser.name.first} ${currUser.name.last}`}</h2>
@@ -59,7 +68,11 @@ const UserCard = () => {
           </div>
         </div>
       </div>
-      <ControlBar changeUser={changeUser} index={currUserIndex}/>
+      <ControlBar
+        changeUser={changeUser}
+        index={currUserIndex}
+        userArr={userArr}
+      />
     </div>
   );
 };
