@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const NewCardForm = (props) => {
   const navigate = useNavigate();
 
@@ -14,9 +13,10 @@ const NewCardForm = (props) => {
   const [favMovie1, setFavMovie1] = useState("");
   const [favMovie2, setFavMovie2] = useState("");
   const [favMovie3, setFavMovie3] = useState("");
-  let userArr = props.userArr;
+  const { userArr, setUserArr } = props;
 
   const newUserObj = {
+    id: userArr.length + 1,
     name: { first: firstName, last: lastName },
     city: city,
     country: country,
@@ -29,10 +29,10 @@ const NewCardForm = (props) => {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        // props.addUserFunction(newUserObj);
-        console.log(props.addUserFunction)
-        console.log(userArr)
-        // navigate(`/users/${userArr.length}`)
+        setUserArr((prevState) => {
+          return [...prevState, newUserObj];
+        });
+        navigate(`/users/${userArr.length + 1}`)
       }}
     >
       <div className="user-card-container">

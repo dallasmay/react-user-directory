@@ -1,19 +1,14 @@
+import { useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
+import data from "./DATA";
 
 import UserCard from "./components/UserCard";
 import Nav from "./components/Nav";
 import NewCardForm from "./components/NewCardForm";
 
 function App() {
-  let addUserFunc;
-  const addUserDrill = (addUserFunction) => {
-    addUserFunc = addUserFunction;
-    return
-  };
-  let userArrVar;
-  const userArrDrill = (userArr) => {
-    userArrVar = userArr
-  }
+  const [userData, setUserData] = useState([...data]);
+  console.log(userData)
 
   return (
     <Routes>
@@ -22,8 +17,7 @@ function App() {
         path="/users/:userId"
         element={
           <div>
-            <Nav />{" "}
-            <UserCard addUserDrill={addUserDrill} userArrDrill={userArrDrill} />
+            <Nav /> <UserCard data={userData} />
           </div>
         }
       />
@@ -32,7 +26,7 @@ function App() {
         element={
           <div>
             <Nav />
-            <NewCardForm addUserFunction={addUserFunc} userArr={userArrVar} />
+            <NewCardForm userArr={userData} setUserArr={setUserData} />
           </div>
         }
       />

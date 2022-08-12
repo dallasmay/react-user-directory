@@ -1,5 +1,5 @@
 import { useState } from "react";
-import data from "../DATA";
+
 import { useParams } from "react-router-dom";
 
 import ControlBar from "./ControlBar";
@@ -8,9 +8,9 @@ import "./UserCard.css";
 
 const UserCard = (props) => {
   const { userId } = useParams();
-
+  
+  const { data: userArr } = props;
   const [currUserIndex, setCurrUserIndex] = useState(userId - 1);
-  const [userArr, setUserArr] = useState([...data]);
 
   let currUser = userArr[currUserIndex];
 
@@ -27,12 +27,6 @@ const UserCard = (props) => {
       setCurrUserIndex((prevState) => prevState - 1);
     }
   };
-
-  const addUser = (newUserObj) => {
-    setUserArr((prevState) => [...prevState, newUserObj]);
-  };
-  props.addUserDrill(addUser)
-  props.userArrDrill(userArr);
 
   return (
     <div>
