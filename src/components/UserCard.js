@@ -27,6 +27,8 @@ const UserCard = (props) => {
       setCurrUserIndex((prevState) => prevState - 1);
     }
   };
+  console.log(userArr);
+  console.log(currUser);
 
   return (
     <div>

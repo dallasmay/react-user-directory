@@ -5,10 +5,10 @@ import data from "./DATA";
 import UserCard from "./components/UserCard";
 import Nav from "./components/Nav";
 import NewCardForm from "./components/NewCardForm";
+import EditUser from "./components/EditUser";
 
 function App() {
   const [userData, setUserData] = useState([...data]);
-  console.log(userData)
 
   return (
     <Routes>
@@ -27,6 +27,15 @@ function App() {
           <div>
             <Nav />
             <NewCardForm userArr={userData} setUserArr={setUserData} />
+          </div>
+        }
+      />
+      <Route
+        path="/users/:userId/edit"
+        element={
+          <div>
+            <Nav />
+            <EditUser userArr={userData} setUserArr={setUserData} />
           </div>
         }
       />
